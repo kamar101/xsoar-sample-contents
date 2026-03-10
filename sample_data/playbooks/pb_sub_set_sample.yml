@@ -1,0 +1,100 @@
+id: pb_sub_set_sample
+version: -1
+name: SUB Set Sample Fields
+description: This is a sub-playbook that sets samplefield8.
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: d7920fee-8ada-4d48-8197-2e08d19a54dc
+    type: start
+    task:
+      id: d7920fee-8ada-4d48-8197-2e08d19a54dc
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      description: ''
+    nexttasks:
+      '#none#':
+      - "6"
+      - "8"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "3":
+    id: "3"
+    taskid: b52aade3-aa90-4343-8417-d4aa26803835
+    type: title
+    task:
+      id: b52aade3-aa90-4343-8417-d4aa2681981
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      description: ''
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 370
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  '15':
+    id: '15'
+    taskid: a3ab8a8f-116c-4471-8912-27cc94fa5234
+    type: regular
+    task:
+      id: a3ab8a8f-116c-4471-8912-27cc94fa5234
+      version: -1
+      name: Set sample fields
+      description: commands.local.cmd.set.incident
+      script: Builtin|||setIncident
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - '4'
+    scriptarguments:
+      samplefield8:
+        simple: ${Endpoint.[0].ID}
+    continueonerror: true
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1790
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+inputs: []
+outputs:
+fromversion: 5.0.0
+tests:
+- No tests (deprecated)
+deprecated: true

@@ -1,0 +1,254 @@
+id: pb_set_1st_sample
+version: -1
+name: Set 1st Sample Playbook
+description: This playbook set the following incident fields; samplefield1, samplefield2, samplefield3
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: d7920fee-8ada-4d48-8197-2e08d19a54dc
+    type: start
+    task:
+      id: d7920fee-8ada-4d48-8197-2e08d19a54dc
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      description: ''
+    nexttasks:
+      '#none#':
+      - "6"
+      - "8"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "3":
+    id: "3"
+    taskid: b52aade3-aa90-4343-8417-d4aa26803d62
+    type: title
+    task:
+      id: b52aade3-aa90-4343-8417-d4aa26803d62
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      description: ''
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 370
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "6":
+    id: "6"
+    taskid: ff2153f9-61b9-43ed-8e5f-ca84225d8c1d
+    type: playbook
+    task:
+      id: ff2153f9-61b9-43ed-8e5f-ca84225d8c1d
+      version: -1
+      name: Does Nothing Sub Sample
+      description: |
+       This is a dummy playbook that does nothing. It is used to demonstrate setting incident fields in a parent playbook.
+      playbookName: Does Nothing Sub Sample
+      type: playbook
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "3"
+    scriptarguments:
+      EmailID:
+        complex:
+          root: incident
+          accessor: emailmessageid
+      From:
+        complex:
+          root: incident
+          accessor: emailfrom
+          transformers:
+          - operator: replaceMatch
+            args:
+              regex:
+                value:
+                  simple: (?i).*<([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})>
+              replaceWith:
+                value:
+                  simple: $1
+      User:
+        complex:
+          root: incident
+          accessor: emailto
+          transformers:
+          - operator: replaceMatch
+            args:
+              regex:
+                value:
+                  simple: (?i).*<([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})>
+              replaceWith:
+                value:
+                  simple: $1
+    separatecontext: true
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 195
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+  '9':
+    id: '9'
+    taskid: a3ab8a8f-116c-4471-8912-27cc94fa5234
+    type: regular
+    task:
+      id: a3ab8a8f-116c-4471-8912-27cc94fa5234
+      version: -1
+      name: Set sample fields
+      description: commands.local.cmd.set.incident
+      script: Builtin|||setIncident
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - '4'
+    scriptarguments:
+      samplefield1:
+        simple: ${Endpoint.[0].ID}
+      samplefield2:
+        simple: ${Endpoint.[0].IPAddress}
+      samplefield3:
+        simple: ${Endpoint.[0].MACAddress}
+    continueonerror: true
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1790
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  '69':
+    id: '69'
+    taskid: a3ab8a8f-116c-4471-8912-ASFASDFASDF5234
+    type: regular
+    task:
+      id: a3ab8a8f-116c-4471-8912-ASFASDFASDF5234
+      version: -1
+      name: Set sample fields
+      description: commands.local.cmd.set.incident
+      script: Builtin|||setIncident
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - '4'
+    scriptarguments:
+      samplefield1:
+        simple: ${Endpoint.[0].ID}
+      samplefield3:
+        simple: ${Endpoint.[0].IPAddress}
+      samplefield5:
+        simple: ${Endpoint.[0].MACAddress}
+    continueonerror: true
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1790
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 385,
+        "width": 810,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+outputs:
+- contextPath: Email
+  description: The email object
+  type: unknown
+- contextPath: File
+  description: Original attachments
+  type: unknown
+- contextPath: Email.To
+  description: The recipient of the email
+  type: string
+- contextPath: Email.From
+  description: The sender of the email
+  type: string
+- contextPath: Email.CC
+  description: The CC address of the email
+  type: string
+- contextPath: Email.BCC
+  description: The BCC address of the email
+  type: string
+- contextPath: Email.HTML
+  description: The email HTML
+  type: string
+- contextPath: Email.Body
+  description: The email text body
+  type: string
+- contextPath: Email.Headers
+  description: The email headers
+  type: unknown
+- contextPath: Email.Subject
+  description: The email subject
+  type: string
+- contextPath: Email.HeadersMap
+  description: The headers of the email.
+fromversion: 5.0.0
+tests:
+- No tests (deprecated)
+deprecated: true

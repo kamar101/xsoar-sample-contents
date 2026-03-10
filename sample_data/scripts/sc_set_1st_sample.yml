@@ -1,0 +1,35 @@
+commonfields:
+  id: sc_set_1st_sample
+  version: 1
+name: sc_set_1st_sample
+script: |-
+  import demistomock as demisto  # noqa: F401
+  from CommonServerPython import *  # noqa: F401
+
+
+  def main():
+
+      demisto.executeCommand(
+          "setIncident",
+          {
+              "samplefield1": "value1",
+              "samplefield2": "value2",
+              "samplefield3": "value3",
+              "samplefield4": "value4",
+          },
+      )
+      return_results("I am a sample script that sets incident fields")
+
+
+  if __name__ == "__builtin__" or __name__ == "builtins":
+      main()
+type: python
+tags: []
+enabled: true
+args: []
+scripttarget: 0
+subtype: python3
+pswd: ""
+runonce: false
+dockerimage: demisto/python3:3.10.0
+runas: DBotWeakRole

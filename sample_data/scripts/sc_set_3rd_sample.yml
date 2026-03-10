@@ -1,0 +1,55 @@
+commonfields:
+  id: sc_set_3rd_sample
+  version: 1
+name: sc_set_3rd_sample
+script: |-
+  import demistomock as demisto  # noqa: F401
+  from CommonServerPython import *  # noqa: F401
+
+
+  def set_using_old_method():
+
+      demisto.executeCommand(
+          "setIncident",
+          {
+              "samplefield1": "value1",
+              "samplefield3": "value3",
+          },
+      )
+
+      return_results("I am a sample script that sets incident fields")
+
+
+  def set_using_new_method():
+      res = execute_command(
+          "setIncident",
+          {
+              "samplefield5": "value5",
+              "samplefield7": "value7",
+          },
+      )
+
+      return_results("I am a sample script that sets incident fields")
+
+
+  def main():
+
+      set_using_old_method()
+
+      set_using_new_method()
+
+      return_results("I am a sample script that sets incident fields")
+
+
+  if __name__ == "__builtin__" or __name__ == "builtins":
+      main()
+type: python
+tags: []
+enabled: true
+args: []
+scripttarget: 0
+subtype: python3
+pswd: ""
+runonce: false
+dockerimage: demisto/python3:3.10.0
+runas: DBotWeakRole

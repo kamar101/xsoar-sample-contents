@@ -1,8 +1,0 @@
-samplefield1
-samplefield2
-samplefield3
-samplefield4
-samplefield5
-samplefield6
-samplefield7
-samplefield8
